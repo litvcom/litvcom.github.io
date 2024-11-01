@@ -17,7 +17,7 @@
     }
 
     const observer = new MutationObserver(() => {
-        if (document.querySelector('.card') && !initMarker) {
+        if (document.querySelector('.card__textbox') && !initMarker) {
             initMarker = true;
             setTimeout(() => {
                 cleanUpPage();
