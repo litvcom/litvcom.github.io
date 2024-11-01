@@ -7,29 +7,28 @@
 
     let initMarker = false;
 
-    function removeAds() {
-        document.querySelectorAll('.ad-bot, .ad_bot, .ad-server').forEach(ad => ad.remove());
+    function cleanUpPage() {
+        document.querySelectorAll('.ad-bot, .ad_bot, .ad-countdown, .ad-video-block, .ad_video_block, .ad-preroll, .ad_preroll, .ad-server').forEach(ad => ad.remove());
         document.querySelectorAll('.open--broadcast, .open--feed, .open--premium, .open--notice').forEach(el => el.remove());
-    }
-
-    function hideElements() {
         $('.selectbox-item__lock').parent().hide();
         $('.settings-param-title').last().hide();
+        $("[data-action=feed]").eq(0).remove();
+        $("[data-action=subscribes]").eq(0).remove();
     }
 
-    const observer = new MutationObserver((mutationsList) => {
-        const hasCardElements = document.getElementsByClassName('card').length > 0;
-
-        if (hasCardElements && !initMarker) {
+    const observer = new MutationObserver(() => {
+        if (document.querySelector('.card') && !initMarker) {
             initMarker = true;
-            setTimeout(hideElements, 50);
-            setTimeout(() => initMarker = false, 500);
+            setTimeout(() => {
+                cleanUpPage();
+                initMarker = false;
+            }, 50);
         }
 
-        removeAds();
+        cleanUpPage();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
 
-    removeAds();
+    cleanUpPage();
 })();
