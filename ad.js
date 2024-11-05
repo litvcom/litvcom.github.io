@@ -16,9 +16,8 @@
 
         document.querySelectorAll('.button--subscribe').forEach(button => button.remove());
 
-        document.querySelectorAll('.selectbox-item__lock').forEach(lock => lock.parentElement.style.display = 'none');
-        const lastSettingsTitle = document.querySelector('.settings-param-title:last-of-type');
-        if (lastSettingsTitle) lastSettingsTitle.style.display = 'none';
+        $('.selectbox-item__lock').parent().hide();
+        $('.settings-param-title').last().hide();
 
         document.querySelector("[data-action='feed']")?.remove();
         document.querySelector("[data-action='subscribes']")?.remove();
