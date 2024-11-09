@@ -1,8 +1,6 @@
 (function () {
     'use strict';
 
-    var isPremium = true;
-
     function create() {
       var html;
       var timer;
@@ -131,7 +129,6 @@
         var _this2 = this;
 
         lezydata = data;
-        console.trace();
         info = new create(object);
         info.create();
         scroll.minus(info.render());
@@ -306,7 +303,6 @@
         var use = new_interface;
         if (!(object.source == 'tmdb' || object.source == 'cub')) use = old_interface;
         if (window.innerWidth < 767) use = old_interface;
-        if (!isPremium) use = old_interface;
         if (Lampa.Manifest.app_digital < 153) use = old_interface;
         return new use(object);
       };
