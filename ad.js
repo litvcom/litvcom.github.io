@@ -14,7 +14,7 @@
         document.querySelectorAll('.open--broadcast, .open--feed, .open--premium, .open--notice')
             .forEach(el => el.remove());
 
-        document.querySelectorAll('.button--subscribe').forEach(button => button.remove());
+        document.querySelectorAll('.button--subscribe, .black-friday__button').forEach(button => button.remove());
 
         $('.selectbox-item__lock').parent().hide();
         $('.settings-param-title').last().hide();
