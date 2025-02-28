@@ -14,7 +14,7 @@
         document.querySelectorAll('.open--broadcast, .open--feed, .open--premium, .open--notice')
             .forEach(el => el.remove());
 
-        document.querySelectorAll('.button--subscribe, .black-friday__button, .christmas__button').forEach(button => button.remove());
+        document.querySelectorAll('.button--subscribe').forEach(button => button.remove()); // .black-friday__button, .christmas__button
 
         $('.selectbox-item__lock').parent().hide();
         $('.settings-param-title').last().hide();
@@ -36,11 +36,36 @@
                 initMarker = false;
             }, 50);
         }
-
         cleanUpPage();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-
     cleanUpPage();
+})();
+
+(function () {
+    const originalCreateElement = document.createElement;
+    document.createElement = function (tagName, ...args) {
+        if (tagName === "video") {
+            let adVideo = originalCreateElement.call(document, tagName, ...args);
+            adVideo.play = function () {
+                setTimeout(() => {
+                    adVideo.ended = true;
+                    adVideo.dispatchEvent(new Event("ended"));
+                }, 500);
+            };
+            return adVideo;
+        }
+        return originalCreateElement.call(document, tagName, ...args);
+    };
+
+    function clearAdTimers() {
+        let highestTimeout = setTimeout(() => {}, 0);
+        for (let i = 0; i <= highestTimeout; i++) {
+            clearTimeout(i);
+            clearInterval(i);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", clearAdTimers);
 })();
