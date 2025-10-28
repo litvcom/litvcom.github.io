@@ -11,7 +11,10 @@
         document.querySelectorAll('.ad-bot, .ad_bot, .ad-countdown, .ad-video-block, .ad_video_block, .ad-preroll, .ad_preroll, .ad-server')
             .forEach(ad => ad.remove());
 
-        document.querySelectorAll('.open--broadcast, .open--feed, .open--premium, .open--notice')
+        document.querySelectorAll('.open--broadcast, .open--feed, .open--premium, .open--notice, .open--profile')
+            .forEach(el => el.remove());
+
+        document.querySelectorAll('.notice--icon, .navigation-tabs')
             .forEach(el => el.remove());
 
         document.querySelectorAll('.button--subscribe').forEach(button => button.remove()); // .black-friday__button, .christmas__button
